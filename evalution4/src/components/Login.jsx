@@ -1,8 +1,10 @@
 import {useDispatch} from "react-redux";
 import {useState} from "react";
 import {Login_Success}from  "../Redux/action"
+import {login} from "../Redux/action"
+import { Orders } from "./Order";
 export const Login = () => {
-    const [user, setUser] = useState("");
+    const [username, setUser] = useState("");
     const [password, setPassword] = useState("")
     const [query, setQuery] = useState("")
 
@@ -17,7 +19,7 @@ export const Login = () => {
     }
 
     const handleLogin =()=> {
-        dispatch(Login_Success({setQuery}))
+        dispatch(login({username,password}))
     }
   return (
     <div>
@@ -40,6 +42,7 @@ export const Login = () => {
       <button className="submit" onClick={handleLogin}>
         Login
       </button>
+      <Orders />
     </div>
   );
 };

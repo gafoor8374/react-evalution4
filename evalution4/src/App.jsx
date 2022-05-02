@@ -21,6 +21,12 @@ function App() {
         <Link className="nav-login" to="/login">
           Login
         </Link>
+        <Link className="nav-login" to="/Orders">
+          Orders
+        </Link>
+        <Link className="nav-login" to="/NewOrder">
+          NewOrder
+        </Link>
       </div>
 
       <Routes>
@@ -28,7 +34,7 @@ function App() {
         <Route path="/Login" element={<Login />}></Route>
         <Route path="/Logoout" element={<Logout />}></Route>
         {/* <Route path="/NewOrder" element={<NewOrder />}></Route>
-        <Route path="/Order" element={<Order />}></Route> */}
+        <Route path="/Order" element={<Orders />}></Route> */}
 
         {/* Routes are as follows:
         Route      Component

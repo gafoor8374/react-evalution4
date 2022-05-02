@@ -1,6 +1,24 @@
+import axios from "axios";
+import { useEffect,useState } from "react";
 export const Orders = () => {
   //  Get all data when admin logs in and populate it
   // store it in redux
+  const [data,setData] =  useState([])
+
+//   const getData = async ()=>{
+//       const d = await fetch(`http://localhost:8080/orders`).then(
+//           (d)=>d.json()
+//       );
+//       setData(data)
+//       console.log(data)
+//   }
+useEffect(()=>{
+    axios.get("http://localhost:8080/orders").then(({data})=>{
+        setData(data)
+    })
+console.log(data);
+},[])
+
 
   return (
     <div>
@@ -12,9 +30,9 @@ export const Orders = () => {
             <option value="cost">Cost</option>
           </select>
         </div>
-        <table className="orders">
+        <table className="orders" >
           <thead>
-            <tr>
+            <tr style={{ border: "1px solid black" }}>
               <th>ID</th>
               <th>Problem</th>
               <th>Client Name</th>
@@ -24,28 +42,35 @@ export const Orders = () => {
               <th>Accept</th>
             </tr>
           </thead>
-          <tbody>
-            <tr className="orders-row">
-              <td className="id"></td>
-              <td className="problem"></td>
-              <td className="owner"></td>
-              <td className="status"></td>
-              <td className="cost"></td>
-              <td className="change-status">
-                {/* Show select dropdown only if status is Not Accepted */}
-                <select className="changeStatus" name="changeStatus">
-                  <option value="Pending">Pending</option>
-                  <option value="In Progress">In Progress</option>
-                  <option value="Done">Done</option>
-                  <option value="Not Accepted">Not Accepted</option>
-                </select>
-              </td>
-              <td className="accept">
-                {/* Show this button only if status is Not Accepted */}
-                {/* on change make request to update it in db, and show changed status in table */}
-                <button>Accept</button>
-              </td>
-            </tr>
+          <tbody style={{ border: "1px solid black" }}>
+            {data.map((item) => {
+              return (
+                <tr
+                  className="orders-row"
+                  style={{ border: "1px solid black" }}
+                >
+                  <td className="id">{item.id}</td>
+                  <td className="problem">{item.problem}</td>
+                  <td className="owner">{item.owner_name}</td>
+                  <td className="status">{item.status}</td>
+                  <td className="cost">{item.cost}</td>
+                  <td className="change-status">
+                    {/* Show select dropdown only if status is Not Accepted */}
+                    <select className="changeStatus" name="changeStatus">
+                      <option value="Pending">Pending</option>
+                      <option value="In Progress">In Progress</option>
+                      <option value="Done">Done</option>
+                      <option value="Not Accepted">Not Accepted</option>
+                    </select>
+                  </td>
+                  <td className="accept">
+                    {/* Show this button only if status is Not Accepted */}
+                    {/* on change make request to update it in db, and show changed status in table */}
+                    <button>Accept</button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

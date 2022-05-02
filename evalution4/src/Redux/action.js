@@ -36,7 +36,7 @@ export const login = ({username,password})=>(dispatch)=>{
     dispatch(loginRequest())
     axios.post(`https://reqres.in/api/login`,{
         username,password
-    }).then((res)=>{
+        }).then((res)=>{
         dispatch(loginSuccess(res.data))
     })
 }
